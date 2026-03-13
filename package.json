@@ -8,6 +8,7 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
   "author": "Sheila Cortés Fernández",
   "license": "MIT",
   "dependencies": {
