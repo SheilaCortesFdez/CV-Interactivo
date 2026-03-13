@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = process.env || 3000;
 
 const cvRoutes = require('./routes/cvRoutes');
 
@@ -12,6 +12,7 @@ const cvRoutes = require('./routes/cvRoutes');
 app.use(cors({
   origin: [
     process.env.GITHUB_PAGES_URL,
+    process.env.RENDER_URL,
     'http://localhost:3000'
   ].filter(Boolean)
 }));
