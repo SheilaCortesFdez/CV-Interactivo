@@ -1,0 +1,390 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #8b7355;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  perspective: 1000px;
+}
+.escena {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  background: linear-gradient(145deg, #f5e6d3, #e8d9c6);
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+.despacho {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+.despacho svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body { padding: 5px; }
+  .escena { border-radius: 8px; }
+  .despacho { padding-bottom: 85%; }
+}
+@media (max-width: 480px) {
+  .despacho { padding-bottom: 100%; }
+}
+@media (min-width: 1200px) {
+  .despacho { padding-bottom: 60%; }
+}
+
+/* ===== ANIMACIONES PERSONAJE ===== */
+@keyframes winkRightEye {
+  0%, 100% { ry: 0; }
+  30%, 70% { ry: 18; }
+}
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.personaje-group {
+  animation: breathe 3s ease-in-out infinite;
+}
+@keyframes hairMove {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(2px) rotate(1deg); }
+}
+.hair-back {
+  animation: hairMove 4s ease-in-out infinite;
+}
+
+/* ===== GENERAL ===== */
+.personaje-container {
+  transition: transform 0.3s ease-out;
+}
+.shadow-3d {
+  filter: drop-shadow(3px 5px 2px rgba(0,0,0,0.3));
+}
+.clickable {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.clickable:hover {
+  transform: scale(1.05);
+}
+
+/* ===== MODAL PORTÁTIL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a2e);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+  animation: modalOpen 0.3s ease-out;
+}
+@keyframes modalOpen {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.modal-header {
+  background: linear-gradient(90deg, #4a90d9, #5aa0e9);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+}
+.modal-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover {
+  background: rgba(255,255,255,0.4);
+}
+.modal-body {
+  padding: 20px;
+  color: #e0e0e0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.modal-body h4 {
+  color: #4a90d9;
+  margin-top: 0;
+}
+.modal-body ul {
+  padding-left: 20px;
+}
+.modal-body li {
+  margin-bottom: 8px;
+}
+@media (max-width: 480px) {
+  .modal { width: 95%; margin: 10px; border-radius: 8px; }
+  .modal-header { padding: 10px 15px; }
+  .modal-header h3 { font-size: 14px; }
+  .modal-body { padding: 15px; font-size: 13px; }
+  .modal-body h4 { font-size: 15px; }
+}
+
+/* ===== LIBRO ABIERTO ===== */
+.book-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+.book-overlay.active {
+  display: flex;
+}
+.book-container {
+  position: relative;
+  width: 560px;
+  max-width: 95vw;
+  height: 380px;
+  max-height: 90vh;
+  transform-style: preserve-3d;
+  animation: bookAppear 0.5s ease-out forwards;
+}
+@keyframes bookAppear {
+  from { transform: rotateX(60deg) scale(0.5); opacity: 0; }
+  to   { transform: rotateX(0deg) scale(1);   opacity: 1; }
+}
+.book-spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 100%;
+  background: var(--book-color, #c0392b);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  z-index: 3;
+}
+.book-page-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(50% - 11px);
+  height: 100%;
+  background: #fdf6e3;
+  border-radius: 4px 0 0 4px;
+  box-shadow: -4px 4px 20px rgba(0,0,0,0.3);
+  transform-origin: right center;
+  transform: rotateY(-8deg);
+  animation: openLeft 0.6s 0.1s ease-out forwards;
+  padding: 24px 20px 24px 28px;
+  overflow-y: auto;
+  font-family: 'Georgia', serif;
+  color: #2c2c2c;
+}
+@keyframes openLeft {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(-8deg); }
+}
+.book-page-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: calc(50% - 11px);
+  height: 100%;
+  background: #fdf9f0;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 4px 4px 20px rgba(0,0,0,0.3);
+  transform-origin: left center;
+  transform: rotateY(8deg);
+  animation: openRight 0.6s 0.1s ease-out forwards;
+  padding: 24px 28px 24px 20px;
+  overflow-y: auto;
+  font-family: 'Georgia', serif;
+  color: #2c2c2c;
+}
+@keyframes openRight {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(8deg); }
+}
+.book-page-left::before,
+.book-page-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px, #d4c9a8 27px, #d4c9a8 28px
+  );
+  background-position: 0 36px;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.book-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 0 0 10px;
+  color: var(--book-color, #c0392b);
+  border-bottom: 2px solid var(--book-color, #c0392b);
+  padding-bottom: 6px;
+  position: relative;
+}
+.book-content {
+  font-size: 13px;
+  line-height: 1.85;
+  position: relative;
+}
+.book-page-num {
+  position: absolute;
+  bottom: 10px;
+  font-size: 11px;
+  color: #999;
+  font-style: italic;
+}
+.book-close-btn {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c0392b;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: background 0.2s;
+}
+.book-close-btn:hover { background: #e74c3c; }
+@media (max-width: 600px) {
+  .book-container { width: 98vw; height: 60vh; }
+  .book-title { font-size: 14px; }
+  .book-content { font-size: 11px; }
+}
+
+/* ===== BOCADILLO PERSONAJE ===== */
+.bocadillo {
+  position: absolute;
+  top: 6%;
+  left: 53%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 3px solid #7a4a25;
+  border-radius: 18px;
+  padding: 14px 20px;
+  min-width: 180px;
+  max-width: 220px;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+.bocadillo.visible {
+  animation: bocadilloEntrar 0.5s ease-out forwards;
+}
+.bocadillo.salir {
+  animation: bocadilloSalir 0.5s ease-in forwards;
+}
+/* Triángulo apuntando hacia el personaje (abajo-izquierda) */
+.bocadillo::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 30px;
+  border-width: 18px 12px 0 12px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+  z-index: 1;
+}
+.bocadillo::before {
+  content: '';
+  position: absolute;
+  bottom: -22px;
+  left: 27px;
+  border-width: 21px 15px 0 15px;
+  border-style: solid;
+  border-color: #7a4a25 transparent transparent transparent;
+  z-index: 0;
+}
+.bocadillo-saludo {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+.bocadillo-nombre {
+  font-size: 16px;
+  font-weight: bold;
+  color: #7a4a25;
+  margin: 2px 0;
+}
+.bocadillo-rol {
+  font-size: 13px;
+  color: #555;
+  font-style: italic;
+}
+@keyframes bocadilloEntrar {
+  0%   { opacity: 0; transform: translateX(-50%) scale(0.7) translateY(-10px); }
+  60%  { transform: translateX(-50%) scale(1.05) translateY(0px); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1) translateY(0px); }
+}
+@keyframes bocadilloSalir {
+  0%   { opacity: 1; transform: translateX(-50%) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) scale(0.7) translateY(-10px); }
+}
+@media (max-width: 768px) {
+  .bocadillo {
+    top: 4%;
+    left: 55%;
+    min-width: 140px;
+    max-width: 170px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .bocadillo-saludo { font-size: 18px; }
+  .bocadillo-nombre { font-size: 13px; }
+  .bocadillo-rol    { font-size: 11px; }
+}

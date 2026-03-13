@@ -1,0 +1,631 @@
+﻿﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Interactivo - Personaje</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="escena">
+    <!-- Bocadillo del personaje -->
+    <div class="bocadillo" id="bocadillo">
+      <div class="bocadillo-saludo">👋 ¡Hola!</div>
+      <div class="bocadillo-nombre">Soy Sheila</div>
+      <div class="bocadillo-rol">Desarrolladora de Software</div>
+      <div class="bocadillo-rol">Puedes ver mi cv, clicando por ejemplo en el portatil!</div>
+    </div>
+    <div class="despacho">
+      <svg width="100%" height="100%" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- Gradientes 3D -->
+          <linearGradient id="wallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#f0e4d4"/>
+            <stop offset="100%" style="stop-color:#d4c4b0"/>
+          </linearGradient>
+          <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#d4a574"/>
+            <stop offset="100%" style="stop-color:#a67c52"/>
+          </linearGradient>
+          <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffe4c9"/>
+            <stop offset="50%" style="stop-color:#fcd5b5"/>
+            <stop offset="100%" style="stop-color:#e8c4a8"/>
+          </linearGradient>
+          <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#a06030"/>
+            <stop offset="50%" style="stop-color:#7a4a25"/>
+            <stop offset="100%" style="stop-color:#5a3a1a"/>
+          </linearGradient>
+          <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff"/>
+            <stop offset="50%" style="stop-color:#f8f8f8"/>
+            <stop offset="100%" style="stop-color:#e8e8e8"/>
+          </linearGradient>
+          <linearGradient id="deskGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#c4875a"/>
+            <stop offset="100%" style="stop-color:#8b5a2b"/>
+          </linearGradient>
+          <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#87ceeb"/>
+            <stop offset="100%" style="stop-color:#5cacee"/>
+          </linearGradient>
+
+          <!-- Filtros 3D -->
+          <filter id="shadow3d" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="4" dy="6" stdDeviation="3" flood-opacity="0.4"/>
+          </filter>
+          <filter id="innerShadow">
+            <feOffset dx="2" dy="2"/>
+            <feGaussianBlur stdDeviation="2" result="offset-blur"/>
+            <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+            <feFlood flood-color="black" flood-opacity="0.2" result="color"/>
+            <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+            <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+          </filter>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- FONDO DESPACHO 3D -->
+        <!-- Pared con gradiente -->
+        <rect x="0" y="0" width="600" height="340" fill="url(#wallGrad)" />
+
+        <!-- Moldura pared -->
+        <rect x="0" y="330" width="600" height="10" fill="#c4a882" />
+
+        <!-- Suelo de madera 3D -->
+        <rect x="0" y="340" width="600" height="160" fill="url(#floorGrad)" />
+        <g opacity="0.3">
+          <line x1="0" y1="370" x2="600" y2="370" stroke="#6b4423" stroke-width="2" />
+          <line x1="0" y1="410" x2="600" y2="410" stroke="#6b4423" stroke-width="2" />
+          <line x1="0" y1="450" x2="600" y2="450" stroke="#6b4423" stroke-width="2" />
+        </g>
+
+        <!-- Ventana 3D -->
+        <g filter="url(#shadow3d)">
+          <rect x="420" y="40" width="150" height="200" fill="url(#windowGrad)" rx="3" />
+          <rect x="420" y="40" width="150" height="200" fill="none" stroke="#6b4423" stroke-width="12" rx="3" />
+          <line x1="495" y1="40" x2="495" y2="240" stroke="#6b4423" stroke-width="6" />
+          <line x1="420" y1="140" x2="570" y2="140" stroke="#6b4423" stroke-width="6" />
+        </g>
+        <!-- Nubes animadas -->
+        <g class="clouds">
+          <ellipse cx="450" cy="80" rx="25" ry="15" fill="#fff" opacity="0.9">
+            <animate attributeName="cx" values="450;480;450" dur="8s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="520" cy="110" rx="30" ry="18" fill="#fff" opacity="0.8">
+            <animate attributeName="cx" values="520;490;520" dur="10s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="480" cy="180" rx="20" ry="12" fill="#fff" opacity="0.7">
+            <animate attributeName="cx" values="480;510;480" dur="6s" repeatCount="indefinite"/>
+          </ellipse>
+        </g>
+
+        <!-- Estantería 3D -->
+        <g filter="url(#shadow3d)">
+          <rect x="25" y="45" width="130" height="220" fill="#7a5a3a" rx="3" />
+          <rect x="30" y="50" width="120" height="210" fill="#8b6b4b" rx="2" />
+          <!-- Estantes con profundidad -->
+          <rect x="30" y="100" width="120" height="8" fill="#6b4a2a" />
+          <rect x="30" y="155" width="120" height="8" fill="#6b4a2a" />
+          <rect x="30" y="210" width="120" height="8" fill="#6b4a2a" />
+          <!-- Libros 3D con sombras (clickeables) -->
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('JavaScript Avanzado', 'Dominio de ES6+, async/await, closures y patrones de diseño.', '#c0392b')">
+            <rect x="38" y="58" width="14" height="40" fill="#c0392b" rx="1" style="pointer-events:all;" />
+            <rect x="38" y="58" width="3" height="40" fill="#a93226" rx="1" />
+            <text x="44" y="85" font-size="4" fill="white" transform="rotate(-90,44,85)" style="pointer-events:none;">JS</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('React & Vue', 'Frameworks modernos para desarrollo frontend.', '#2980b9')">
+            <rect x="54" y="62" width="12" height="36" fill="#2980b9" rx="1" style="pointer-events:all;" />
+            <rect x="54" y="62" width="3" height="36" fill="#2471a3" rx="1" />
+            <text x="59" y="83" font-size="4" fill="white" transform="rotate(-90,59,83)" style="pointer-events:none;">React</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('Node.js', 'Backend con Express, APIs RESTful y microservicios.', '#27ae60')">
+            <rect x="68" y="56" width="16" height="42" fill="#27ae60" rx="1" style="pointer-events:all;" />
+            <rect x="68" y="56" width="3" height="42" fill="#229954" rx="1" />
+            <text x="75" y="83" font-size="4" fill="white" transform="rotate(-90,75,83)" style="pointer-events:none;">Node</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('Python', 'Automatización, scripting y análisis de datos.', '#8e44ad')">
+            <rect x="86" y="60" width="13" height="38" fill="#8e44ad" rx="1" style="pointer-events:all;" />
+            <rect x="86" y="60" width="3" height="38" fill="#7d3c98" rx="1" />
+            <text x="92" y="82" font-size="4" fill="white" transform="rotate(-90,92,82)" style="pointer-events:none;">Py</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('Bases de Datos', 'MongoDB, PostgreSQL, MySQL y diseño de esquemas.', '#d35400')">
+            <rect x="101" y="56" width="15" height="42" fill="#d35400" rx="1" style="pointer-events:all;" />
+            <rect x="101" y="56" width="3" height="42" fill="#ba4a00" rx="1" />
+            <text x="107" y="82" font-size="4" fill="white" transform="rotate(-90,107,82)" style="pointer-events:none;">BBDD</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('DevOps', 'Docker, CI/CD, Git y despliegue en la nube.', '#16a085')">
+            <rect x="118" y="62" width="12" height="36" fill="#16a085" rx="1" style="pointer-events:all;" />
+            <rect x="118" y="62" width="3" height="36" fill="#138d75" rx="1" />
+            <text x="123" y="83" font-size="4" fill="white" transform="rotate(-90,123,83)" style="pointer-events:none;">DevOps</text>
+          </g>
+          <!-- Segunda fila de libros -->
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('HTML5 & CSS3', 'Maquetación moderna, Flexbox, Grid y animaciones.', '#e74c3c')">
+            <rect x="40" y="112" width="18" height="40" fill="#e74c3c" rx="1" style="pointer-events:all;" />
+            <rect x="40" y="112" width="3" height="40" fill="#cb4335" rx="1" />
+            <text x="48" y="136" font-size="4" fill="white" transform="rotate(-90,48,136)" style="pointer-events:none;">HTML</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('TypeScript', 'Tipado estático para JavaScript escalable.', '#3498db')">
+            <rect x="60" y="116" width="14" height="36" fill="#3498db" rx="1" style="pointer-events:all;" />
+            <rect x="60" y="116" width="3" height="36" fill="#2e86c1" rx="1" />
+            <text x="66" y="137" font-size="4" fill="white" transform="rotate(-90,66,137)" style="pointer-events:none;">TS</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('Testing', 'Jest, Cypress y pruebas unitarias/integración.', '#2ecc71')">
+            <rect x="76" y="110" width="12" height="42" fill="#2ecc71" rx="1" style="pointer-events:all;" />
+            <rect x="76" y="110" width="3" height="42" fill="#28b463" rx="1" />
+            <text x="82" y="134" font-size="4" fill="white" transform="rotate(-90,82,134)" style="pointer-events:none;">Test</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('Arquitectura', 'Patrones MVC, microservicios y clean code.', '#9b59b6')">
+            <rect x="90" y="115" width="16" height="38" fill="#9b59b6" rx="1" style="pointer-events:all;" />
+            <rect x="90" y="115" width="3" height="38" fill="#884ea0" rx="1" />
+            <text x="97" y="137" font-size="4" fill="white" transform="rotate(-90,97,137)" style="pointer-events:none;">Arq.</text>
+          </g>
+          <g class="clickable" style="cursor: pointer;" onclick="openBookModal('Seguridad Web', 'OWASP, autenticación JWT y buenas prácticas.', '#e67e22')">
+            <rect x="108" y="112" width="13" height="40" fill="#e67e22" rx="1" style="pointer-events:all;" />
+            <rect x="108" y="112" width="3" height="40" fill="#ca6f1e" rx="1" />
+            <text x="114" y="135" font-size="4" fill="white" transform="rotate(-90,114,135)" style="pointer-events:none;">Seg.</text>
+          </g>
+          <!-- Jarrón de flores - tercer estante, lado derecho -->
+          <ellipse cx="128" cy="248" rx="12" ry="4" fill="#3a6a8a" />
+          <path d="M118 248 Q116 226 120 216 L136 216 Q140 226 138 248 Z" fill="#4a8ab0" />
+          <ellipse cx="128" cy="216" rx="10" ry="3" fill="#5a9ac0" />
+          <!-- Flores -->
+          <circle cx="123" cy="203" r="6" fill="#ff6b8a" />
+          <circle cx="123" cy="203" r="3" fill="#ffeb3b" />
+          <circle cx="133" cy="199" r="6" fill="#ff8a65" />
+          <circle cx="133" cy="199" r="3" fill="#ffeb3b" />
+          <circle cx="128" cy="193" r="7" fill="#e91e63" />
+          <circle cx="128" cy="193" r="3" fill="#ffeb3b" />
+          <circle cx="120" cy="196" r="5" fill="#9c27b0" />
+          <circle cx="120" cy="196" r="2" fill="#ffeb3b" />
+          <circle cx="136" cy="206" r="5" fill="#ff5722" />
+          <circle cx="136" cy="206" r="2" fill="#ffeb3b" />
+          <!-- Tallos -->
+          <line x1="123" y1="209" x2="123" y2="216" stroke="#4caf50" stroke-width="2" />
+          <line x1="133" y1="205" x2="131" y2="216" stroke="#4caf50" stroke-width="2" />
+          <line x1="128" y1="200" x2="128" y2="216" stroke="#4caf50" stroke-width="2" />
+          <line x1="120" y1="201" x2="122" y2="216" stroke="#4caf50" stroke-width="2" />
+          <line x1="136" y1="211" x2="134" y2="216" stroke="#4caf50" stroke-width="2" />
+          <!-- Marco GitHub - segundo nivel estantería izquierda -->
+          <rect x="35" y="163" width="34" height="42" fill="#7a4a25" rx="3" />
+          <rect x="38" y="166" width="28" height="36" fill="#ffffff" rx="2" />
+          <a href="https://github.com/sheilacortesfdez" target="_blank" style="cursor:pointer;" title="GitHub - sheilacortesfdez">
+            <rect x="38" y="166" width="28" height="36" fill="transparent" rx="2" />
+            <g transform="translate(41, 169) scale(0.9)">
+              <path fill="#24292e" d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
+            </g>
+          </a>
+
+          <!-- Marco LinkedIn - segundo nivel estantería derecha -->
+          <rect x="76" y="163" width="34" height="42" fill="#7a4a25" rx="3" />
+          <rect x="79" y="166" width="28" height="36" fill="#0a66c2" rx="2" />
+          <a href="https://linkedin.com/in/sheilacortesfdez" target="_blank" style="cursor:pointer;" title="LinkedIn - sheilacortesfdez">
+            <rect x="79" y="166" width="28" height="36" fill="transparent" rx="2" />
+            <g transform="translate(82, 169) scale(0.9)">
+              <path fill="white" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </g>
+          </a>
+        </g>
+
+        <!-- Mesa/escritorio 3D -->
+        <g filter="url(#shadow3d)">
+          <rect x="170" y="300" width="300" height="25" fill="url(#deskGrad)" rx="4" />
+          <rect x="170" y="300" width="300" height="5" fill="#d4a070" rx="2" />
+          <!-- Patas mesa 3D -->
+          <rect x="190" y="325" width="20" height="90" fill="#7a4a25" rx="2" />
+          <rect x="430" y="325" width="20" height="90" fill="#7a4a25" rx="2" />
+        </g>
+
+        <!-- Objetos mesa 3D -->
+        <!-- Laptop (clickeable) - lado derecho de la mesa -->
+        <g id="laptop" filter="url(#shadow3d)" class="clickable" style="cursor: pointer;" onclick="openLaptopModal()">
+          <rect x="380" y="255" width="90" height="55" rx="4" fill="#2a2a2a" />
+          <rect x="385" y="260" width="80" height="40" fill="#1a1a2e" />
+          <rect x="388" y="263" width="74" height="34" fill="#4a90d9">
+            <animate attributeName="fill" values="#4a90d9;#5aa0e9;#4a90d9" dur="3s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="370" y="295" width="110" height="10" rx="3" fill="#3a3a3a" />
+          <ellipse cx="425" cy="299" rx="8" ry="3" fill="#4a4a4a" />
+        </g>
+
+        <!-- Calendario (clickeable) - lado izquierdo de la mesa, apoyado en la superficie -->
+        <g filter="url(#shadow3d)" class="clickable" style="cursor:pointer;" onclick="openCalendarModal()">
+          <!-- Base calendario -->
+          <rect x="193" y="255" width="60" height="50" fill="#fff" rx="3" stroke="#ddd" stroke-width="1"/>
+          <!-- Cabecera roja -->
+          <rect x="193" y="255" width="60" height="14" fill="#e74c3c" rx="3"/>
+          <rect x="193" y="264" width="60" height="5" fill="#e74c3c"/>
+          <!-- Espirales -->
+          <circle cx="207" cy="255" r="2.5" fill="none" stroke="#bbb" stroke-width="1.5"/>
+          <circle cx="223" cy="255" r="2.5" fill="none" stroke="#bbb" stroke-width="1.5"/>
+          <circle cx="239" cy="255" r="2.5" fill="none" stroke="#bbb" stroke-width="1.5"/>
+          <!-- Mes -->
+          <text x="223" y="264" font-size="5.5" fill="white" font-weight="bold" text-anchor="middle">MARZO 2026</text>
+          <!-- Días de la semana -->
+          <text x="198" y="276" font-size="4" fill="#e74c3c" font-weight="bold">L</text>
+          <text x="206" y="276" font-size="4" fill="#e74c3c" font-weight="bold">M</text>
+          <text x="214" y="276" font-size="4" fill="#e74c3c" font-weight="bold">X</text>
+          <text x="222" y="276" font-size="4" fill="#e74c3c" font-weight="bold">J</text>
+          <text x="230" y="276" font-size="4" fill="#e74c3c" font-weight="bold">V</text>
+          <text x="238" y="276" font-size="4" fill="#999">S</text>
+          <text x="246" y="276" font-size="4" fill="#999">D</text>
+          <!-- Fila 1 -->
+          <text x="238" y="284" font-size="4.5" fill="#555">1</text>
+          <text x="246" y="284" font-size="4.5" fill="#555">2</text>
+          <!-- Fila 2 -->
+          <text x="198" y="291" font-size="4.5" fill="#555">3</text>
+          <text x="206" y="291" font-size="4.5" fill="#555">4</text>
+          <text x="214" y="291" font-size="4.5" fill="#555">5</text>
+          <text x="222" y="291" font-size="4.5" fill="#555">6</text>
+          <text x="230" y="291" font-size="4.5" fill="#555">7</text>
+          <text x="238" y="291" font-size="4.5" fill="#555">8</text>
+          <text x="246" y="291" font-size="4.5" fill="#555">9</text>
+          <!-- Fila 3 -->
+          <text x="198" y="298" font-size="4.5" fill="#555">10</text>
+          <text x="206" y="298" font-size="4.5" fill="#555">11</text>
+          <text x="214" y="298" font-size="4.5" fill="#555">12</text>
+          <!-- Día 13 resaltado (hoy) -->
+          <circle cx="223" cy="296" r="4.5" fill="#e74c3c"/>
+          <text x="222" y="298" font-size="4.5" fill="white" font-weight="bold">13</text>
+          <text x="230" y="298" font-size="4.5" fill="#555">14</text>
+          <text x="238" y="298" font-size="4.5" fill="#555">15</text>
+          <text x="246" y="298" font-size="4.5" fill="#555">16</text>
+        </g>
+
+        <!-- PERSONAJE 3D -->
+        <g class="personaje-container" id="personaje">
+          <g class="personaje-group shadow-3d">
+            <!-- Pelo trasero largo con animación -->
+            <g class="hair-back">
+              <path d="M282 155 Q258 240 278 320 Q285 335 292 320 L292 210 Z" fill="url(#hairGrad)" />
+              <path d="M358 155 Q382 240 362 320 Q355 335 348 320 L348 210 Z" fill="url(#hairGrad)" />
+            </g>
+
+            <!-- Cuello con sombra -->
+            <rect x="307" y="182" width="26" height="28" fill="url(#skinGrad)" rx="3" />
+
+            <!-- Torso (camisa blanca 3D) -->
+            <path d="M292 210
+                     C285 218 280 235 280 265
+                     L280 300
+                     L360 300
+                     L360 265
+                     C360 235 355 218 348 210
+                     L335 203
+                     L320 207
+                     L305 203 Z" fill="url(#shirtGrad)" stroke="#e0e0e0" stroke-width="1" />
+
+            <!-- Pliegues camisa -->
+            <path d="M300 230 Q310 250 300 280" fill="none" stroke="#ddd" stroke-width="1" opacity="0.5" />
+            <path d="M340 230 Q330 250 340 280" fill="none" stroke="#ddd" stroke-width="1" opacity="0.5" />
+
+            <!-- Cuello de camisa -->
+            <path d="M305 210 L320 225 L335 210" fill="none" stroke="#e8e8e8" stroke-width="3" stroke-linecap="round" />
+
+            <!-- Collar dorado 3D -->
+            <ellipse cx="320" cy="215" rx="10" ry="4" fill="#f9d976" filter="url(#glow)" />
+            <circle cx="320" cy="223" r="6" fill="#f9d976" filter="url(#glow)">
+              <animate attributeName="r" values="6;6.5;6" dur="2s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Brazo izquierdo (estático) -->
+            <path d="M280 215
+                     Q268 228 263 250
+                     Q260 270 262 290
+                     L270 290
+                     Q272 270 275 250
+                     Q278 232 288 218 Z" fill="url(#skinGrad)" />
+            <!-- Mano izquierda -->
+            <ellipse cx="266" cy="295" rx="9" ry="12" fill="url(#skinGrad)" />
+
+            <!-- Brazo derecho (animable) -->
+            <g id="rightArm" class="right-arm">
+              <path d="M360 215
+                       Q372 228 377 250
+                       Q380 270 378 290
+                       L370 290
+                       Q368 270 365 250
+                       Q362 232 352 218 Z" fill="url(#skinGrad)" />
+              <!-- Mano derecha -->
+              <g id="rightHand" class="right-hand">
+                <ellipse cx="374" cy="295" rx="9" ry="12" fill="url(#skinGrad)" />
+              </g>
+            </g>
+
+            <!-- Falda negra -->
+            <path d="M280 298
+                     L270 360
+                     Q270 368 285 368
+                     L355 368
+                     Q370 368 370 360
+                     L360 298 Z" fill="#222" stroke="#1a1a1a" stroke-width="1" />
+
+            <!-- Piernas -->
+            <path d="M295 365
+                     L292 420
+                     Q290 428 298 428
+                     L312 428
+                     Q318 428 316 420
+                     L310 365 Z" fill="url(#skinGrad)" />
+            <path d="M330 365
+                     L328 420
+                     Q326 428 334 428
+                     L348 428
+                     Q354 428 352 420
+                     L345 365 Z" fill="url(#skinGrad)" />
+
+            <!-- Zapatos -->
+            <ellipse cx="305" cy="430" rx="14" ry="6" fill="#222" />
+            <ellipse cx="341" cy="430" rx="14" ry="6" fill="#222" />
+
+            <!-- Cabeza 3D -->
+            <circle cx="320" cy="125" r="58" fill="url(#skinGrad)" />
+
+            <!-- Pelo - flequillo y lateral 3D -->
+            <ellipse cx="320" cy="85" rx="54" ry="25" fill="url(#hairGrad)" />
+            <path d="M270 95 Q262 120 270 145 Q280 125 275 105 Z" fill="url(#hairGrad)" />
+            <path d="M370 95 Q378 120 370 145 Q360 125 365 105 Z" fill="url(#hairGrad)" />
+            <!-- Mechones laterales -->
+            <path d="M263 115 Q252 150 265 185 Q272 165 268 130 Z" fill="url(#hairGrad)" />
+            <path d="M377 115 Q388 150 375 185 Q368 165 372 130 Z" fill="url(#hairGrad)" />
+            <!-- Reflejos pelo -->
+            <path d="M290 78 Q320 70 350 78" fill="none" stroke="#b87040" stroke-width="3" opacity="0.5" />
+
+            <!-- Orejas -->
+            <ellipse cx="267" cy="125" rx="8" ry="12" fill="url(#skinGrad)" />
+            <ellipse cx="373" cy="125" rx="8" ry="12" fill="url(#skinGrad)" />
+            <ellipse cx="267" cy="125" rx="4" ry="6" fill="#e8b898" />
+            <ellipse cx="373" cy="125" rx="4" ry="6" fill="#e8b898" />
+
+            <!-- Ojos -->
+            <g class="eye-group">
+              <!-- Ojo izquierdo -->
+              <g id="leftEye">
+                <ellipse cx="295" cy="130" rx="14" ry="18" fill="#fff" />
+                <ellipse cx="295" cy="133" rx="11" ry="14" fill="#5d4037" />
+                <ellipse cx="295" cy="135" rx="6" ry="8" fill="#2d1810" />
+                <circle cx="300" cy="128" r="4" fill="#fff" />
+                <circle cx="292" cy="138" r="2" fill="#fff" opacity="0.7" />
+                <!-- Párpado izquierdo -->
+                <ellipse class="eyelid-left" cx="295" cy="130" rx="15" ry="18" fill="url(#skinGrad)">
+                  <animate attributeName="ry" values="0;0;18;0;0" keyTimes="0;0.92;0.95;0.98;1" dur="4s" repeatCount="indefinite"/>
+                </ellipse>
+              </g>
+
+              <!-- Ojo derecho -->
+              <g id="rightEye">
+                <ellipse cx="345" cy="130" rx="14" ry="18" fill="#fff" />
+                <ellipse cx="345" cy="133" rx="11" ry="14" fill="#5d4037" />
+                <ellipse cx="345" cy="135" rx="6" ry="8" fill="#2d1810" />
+                <circle cx="350" cy="128" r="4" fill="#fff" />
+                <circle cx="342" cy="138" r="2" fill="#fff" opacity="0.7" />
+                <!-- Párpado derecho -->
+                <ellipse id="rightEyeLid" class="eyelid-right" cx="345" cy="130" rx="15" ry="18" fill="url(#skinGrad)">
+                  <animate id="rightBlinkAnim" attributeName="ry" values="0;0;18;0;0" keyTimes="0;0.92;0.95;0.98;1" dur="4s" repeatCount="indefinite"/>
+                </ellipse>
+              </g>
+            </g>
+
+            <!-- Pestañas -->
+            <path d="M282 120 Q285 115 290 118" stroke="#3a2a1a" stroke-width="2" fill="none" />
+            <path d="M300 118 Q305 114 310 117" stroke="#3a2a1a" stroke-width="2" fill="none" />
+            <path d="M330 117 Q335 114 340 118" stroke="#3a2a1a" stroke-width="2" fill="none" />
+            <path d="M350 118 Q355 115 358 120" stroke="#3a2a1a" stroke-width="2" fill="none" />
+
+            <!-- Cejas expresivas -->
+            <path d="M280 112 Q295 106 310 112" stroke="#5a3a1a" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path d="M330 112 Q345 106 360 112" stroke="#5a3a1a" stroke-width="3" fill="none" stroke-linecap="round" />
+
+            <!-- Nariz con sombra -->
+            <ellipse cx="320" cy="148" rx="5" ry="3" fill="#e8c4a8" />
+            <ellipse cx="320" cy="149" rx="3" ry="2" fill="#dab89a" />
+
+            <!-- Boca sonriente animada -->
+            <path id="mouth" d="M305 162 Q320 178 335 162" stroke="#c45a3a" stroke-width="4" fill="none" stroke-linecap="round">
+              <animate attributeName="d" values="M305 162 Q320 178 335 162;M305 165 Q320 175 335 165;M305 162 Q320 178 335 162" dur="4s" repeatCount="indefinite"/>
+            </path>
+
+            <!-- Mejillas sonrojadas con brillo -->
+            <ellipse cx="275" cy="152" rx="12" ry="7" fill="#ffb6b6" opacity="0.5">
+              <animate attributeName="opacity" values="0.5;0.7;0.5" dur="3s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="365" cy="152" rx="12" ry="7" fill="#ffb6b6" opacity="0.5">
+              <animate attributeName="opacity" values="0.5;0.7;0.5" dur="3s" repeatCount="indefinite"/>
+            </ellipse>
+          </g>
+        </g>
+
+        <!-- Perrito animado (estilo corgi) - se mueve y gira -->
+        <g id="perrito">
+          <g id="perritoBody" filter="url(#shadow3d)">
+            <!-- Cuerpo rechoncho -->
+            <ellipse cx="0" cy="12" rx="28" ry="14" fill="#f5a742" />
+            <!-- Barriga blanca -->
+            <ellipse cx="0" cy="15" rx="20" ry="8" fill="#fff" />
+            <!-- Cabeza grande y redonda -->
+            <circle cx="33" cy="0" r="16" fill="#f5a742" />
+            <!-- Cara blanca -->
+            <ellipse cx="37" cy="5" rx="10" ry="8" fill="#fff" />
+            <!-- Orejas puntiagudas -->
+            <path d="M20 -10 L15 -30 L27 -15 Z" fill="#f5a742" />
+            <path d="M45 -10 L50 -30 L38 -15 Z" fill="#f5a742" />
+            <path d="M21 -12 L18 -25 L26 -15 Z" fill="#ffcca0" />
+            <path d="M44 -12 L47 -25 L39 -15 Z" fill="#ffcca0" />
+            <!-- Hocico -->
+            <ellipse cx="47" cy="5" rx="6" ry="5" fill="#fff" />
+            <!-- Nariz grande -->
+            <ellipse cx="50" cy="3" rx="3" ry="2.5" fill="#222" />
+            <!-- Ojos realistas -->
+            <ellipse cx="28" cy="-3" rx="5" ry="5" fill="#fff" stroke="#222" stroke-width="1" />
+            <circle cx="29" cy="-3" r="3" fill="#4a3728" />
+            <circle cx="29" cy="-3" r="1.5" fill="#222" />
+            <circle cx="30" cy="-5" r="1" fill="#fff" />
+            <ellipse cx="40" cy="-3" rx="5" ry="5" fill="#fff" stroke="#222" stroke-width="1" />
+            <circle cx="41" cy="-3" r="3" fill="#4a3728" />
+            <circle cx="41" cy="-3" r="1.5" fill="#222" />
+            <circle cx="42" cy="-5" r="1" fill="#fff" />
+            <!-- Boca sonriente -->
+            <path d="M43 10 Q47 14 51 10" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" />
+            <!-- Lengua -->
+            <ellipse cx="47" cy="13" rx="3" ry="4" fill="#ff8a9b" />
+            <!-- Patas con animación de caminar -->
+            <ellipse cx="-23" cy="24" rx="6" ry="8" fill="#f5a742">
+              <animate attributeName="cx" values="-23;-20;-23;-26;-23" dur="0.4s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="-10" cy="24" rx="6" ry="8" fill="#f5a742">
+              <animate attributeName="cx" values="-10;-13;-10;-7;-10" dur="0.4s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="10" cy="24" rx="6" ry="8" fill="#f5a742">
+              <animate attributeName="cx" values="10;13;10;7;10" dur="0.4s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="23" cy="24" rx="6" ry="8" fill="#f5a742">
+              <animate attributeName="cx" values="23;20;23;26;23" dur="0.4s" repeatCount="indefinite"/>
+            </ellipse>
+            <!-- Cola esponjosa animada -->
+            <ellipse cx="-30" cy="5" rx="10" ry="7" fill="#f5a742">
+              <animate attributeName="ry" values="7;9;7" dur="0.3s" repeatCount="indefinite"/>
+            </ellipse>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  <!-- Modal del portátil -->
+  <div id="laptopModal" class="modal-overlay" onclick="closeLaptopModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>💻 Mi Portátil - Habilidades Técnicas</h3>
+        <button class="modal-close" onclick="closeLaptopModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4>🛠️ Tecnologías que domino:</h4>
+        <ul>
+          <li><strong>Backend:</strong> Java</li>
+          <li><strong>Arquitecturas:</strong> Por capas, Hexagonal</li>
+          <li><strong>Frameworks:</strong> SpringBoot</li>
+          <li><strong>Bases de datos:</strong> MongoDB, Oracle, MySQL</li>
+          <li><strong>Testing:</strong> JUnit5, Cilantrum, Newman, JMeter</li>
+          <li><strong>Calidad y seguridad:</strong> Análisis estático de código (SonarQuebe), SAST (Fortify) y Trivy</li>
+          <li><strong>Logging y monitorización:</strong> Openshift, Dynatrace</li>
+          <li><strong>DevOps/CI/CD:</strong> Jenkins, GitHub Actions</li>
+        </ul>
+        <h4>📂 Proyectos destacados:</h4>
+        <ul>
+          <li>FunkBreakSchool: Proyecto de fin de curso del CFGS DAW </li>
+        </ul>
+        <h4>🔗 LinkedIn:</h4>
+        <ul>
+          <li>
+            <a href="https://linkedin.com/in/sheilacortesfdez" target="_blank"
+               style="color: #ffffff; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#0a66c2" style="vertical-align: middle;">
+                <rect width="24" height="24" rx="4" fill="#0a66c2"/>
+                <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z" fill="white"/>
+              </svg>Sheila Cortés Fernández
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de los libros -->
+  <!-- Libro abierto -->
+  <div id="bookOverlay" class="book-overlay" onclick="closeBook(event)">
+    <div class="book-container" onclick="event.stopPropagation()">
+      <button id="bookCloseBtn" class="book-close-btn" onclick="closeBook()">×</button>
+      <div class="book-spine" id="bookSpineEl"></div>
+      <!-- Página izquierda -->
+      <div class="book-page-left">
+        <div class="book-title" id="bookTitleLeft">Título</div>
+        <div class="book-content" id="bookContentLeft"></div>
+        <span class="book-page-num" style="left:16px;">1</span>
+      </div>
+      <!-- Página derecha -->
+      <div class="book-page-right">
+        <div class="book-content" id="bookContentRight"></div>
+        <span class="book-page-num" style="right:16px;">2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Calendario - Reservar cita -->
+  <div id="calendarModal" class="modal-overlay" onclick="closeCalendarModal(event)">
+    <div class="modal" onclick="event.stopPropagation()" style="max-width:460px;">
+      <div class="modal-header" style="background: linear-gradient(90deg, #e74c3c, #c0392b);">
+        <h3>📅 Reservar una cita</h3>
+        <button class="modal-close" onclick="closeCalendarModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin:0 0 16px; color:#ccc; font-size:13px;">
+          Rellena el formulario
+        </p>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div>
+            <label for="cita-nombre" style="color:#aaa; font-size:12px; display:block; margin-bottom:4px;">Tu nombre *</label>
+            <input id="cita-nombre" type="text" placeholder="Ej: Carlos García"
+              style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #444;
+                     background:#2a2a3e; color:#fff; font-size:13px; outline:none;"/>
+          </div>
+          <div>
+            <label for="cita-email" style="color:#aaa; font-size:12px; display:block; margin-bottom:4px;">Tu email *</label>
+            <input id="cita-email" type="email" placeholder="Ej: carlos@email.com"
+              style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #444;
+                     background:#2a2a3e; color:#fff; font-size:13px; outline:none;"/>
+          </div>
+          <div>
+            <label for="cita-fecha" style="color:#aaa; font-size:12px; display:block; margin-bottom:4px;">Fecha preferida *</label>
+            <input id="cita-fecha" type="date"
+              style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #444;
+                     background:#2a2a3e; color:#fff; font-size:13px; outline:none;"/>
+          </div>
+          <div>
+            <label for="cita-hora" style="color:#aaa; font-size:12px; display:block; margin-bottom:4px;">Hora preferida</label>
+            <select id="cita-hora"
+              style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #444;
+                     background:#2a2a3e; color:#fff; font-size:13px; outline:none;">
+              <option value="">-- Selecciona una hora --</option>
+              <option>16:00</option><option>16:30</option>
+              <option>17:00</option><option>17:30</option>
+              <option>18:00</option><option>18:30</option>
+              <option>19:00</option><option>19:30</option>
+            </select>
+          </div>
+          <div>
+            <label for="cita-motivo" style="color:#aaa; font-size:12px; display:block; margin-bottom:4px;">Motivo de la reunión</label>
+            <textarea id="cita-motivo" placeholder="Ej: Me gustaría hablar sobre una oportunidad laboral..."
+              rows="3"
+              style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #444;
+                     background:#2a2a3e; color:#fff; font-size:13px; outline:none; resize:vertical;"></textarea>
+          </div>
+        </div>
+
+        <div id="cita-error" style="color:#e74c3c; font-size:12px; margin-top:8px; display:none;">
+          ⚠️ Por favor rellena los campos obligatorios (nombre, email y fecha).
+        </div>
+
+        <button onclick="enviarCita()"
+          style="margin-top:16px; width:100%; padding:10px; background:linear-gradient(90deg,#e74c3c,#c0392b);
+                 color:white; border:none; border-radius:8px; font-size:14px; font-weight:bold;
+                 cursor:pointer; transition:opacity 0.2s;"
+          onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          ✉️ Enviar solicitud de cita
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
