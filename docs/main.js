@@ -1,9 +1,9 @@
 // ===== CONFIGURACIÓN EMAILJS =====
 // Tu correo nunca aparece aquí — EmailJS lo guarda en su servidor
 // Registrate gratis en https://www.emailjs.com y rellena estos 3 valores:
-const EMAILJS_SERVICE_ID  = 'TU_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'TU_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'service_ss4nzxu';
+const EMAILJS_TEMPLATE_ID = 'template_0vnslmf';
+const EMAILJS_PUBLIC_KEY  = '_wdz5QyXpIeoR1Zkn';
 
 // ===== PARPADEO =====
 function blink() {
