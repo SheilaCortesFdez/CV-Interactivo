@@ -3,9 +3,10 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
-const app = express();
-const port = process.env || 3000;
 const path = require('path');
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 const cvRoutes = require('./routes/cvRoutes');
 
