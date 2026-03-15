@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 const app = express();
 const port = process.env || 3000;
+const path = require('path');
 
 const cvRoutes = require('./routes/cvRoutes');
 
@@ -18,7 +19,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', cvRoutes);
 
 // ===== NODEMAILER =====
