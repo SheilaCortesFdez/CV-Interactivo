@@ -34,8 +34,8 @@ app.use('/api', cvRoutes);
 // ===== NODEMAILER =====
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS
@@ -43,6 +43,14 @@ const transporter = nodemailer.createTransport({
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000
+  
+});
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log("SMTP ERROR:", error);
+  } else {
+    console.log("SMTP listo para enviar");
+  }
 });
 
 // ===== RATE LIMIT: máx 3 solicitudes por IP cada 60 minutos =====
@@ -115,9 +123,10 @@ app.post('/api/cita', citaLimiter, async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.json({ ok: true, mensaje: '¡Solicitud enviada correctamente!' });
   } catch (err) {
-    console.error('Error al enviar email:', err.message);
+    console.error('Error al enviar email:', err);
     res.status(500).json({ error: 'No se pudo enviar el email. Inténtalo más tarde.' });
   }
+  
 });
 
 app.listen(port, () => {
