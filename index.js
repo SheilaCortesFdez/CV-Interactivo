@@ -33,11 +33,16 @@ app.use('/api', cvRoutes);
 
 // ===== NODEMAILER =====
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS
-  }
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 });
 
 // ===== RATE LIMIT: máx 3 solicitudes por IP cada 60 minutos =====
