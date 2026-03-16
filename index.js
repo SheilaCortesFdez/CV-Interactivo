@@ -6,6 +6,14 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
+app.set('trust proxy', 1);
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+
+app.use(limiter);
 const port = process.env.PORT || 3000;
 
 const cvRoutes = require('./routes/cvRoutes');
